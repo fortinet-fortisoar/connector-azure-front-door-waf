@@ -321,7 +321,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
         },
         {
           "title": "Location",
@@ -331,6 +332,7 @@
           "type": "text",
           "name": "location",
           "description": "Specify the resource location.",
+          "tooltip": "Specify the resource location.",
           "placeholder": "eg: Global"
         },
         {
@@ -341,6 +343,7 @@
           "type": "json",
           "name": "customRules",
           "description": "Specify custom rules inside the policy.",
+          "tooltip": "Specify custom rules inside the policy.",
           "value": {
             "rules": [
               {
@@ -371,6 +374,7 @@
           "type": "json",
           "name": "managedRules",
           "description": "Specify managed rules inside the policy.",
+          "tooltip": "Specify managed rules inside the policy.",
           "value": {
             "managedRuleSets": []
           }
@@ -383,6 +387,7 @@
           "type": "json",
           "name": "policySettings",
           "description": "Specify settings for the policy.",
+          "tooltip": "Specify settings for the policy.",
           "value": {
             "customBlockResponseBody": null,
             "customBlockResponseStatusCode": null,
@@ -399,7 +404,8 @@
           "type": "text",
           "name": "sku",
           "placeholder": "eg: Classic_AzureFrontDoor",
-          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
         },
         {
           "title": "Tags",
@@ -409,6 +415,7 @@
           "type": "json",
           "name": "tags",
           "description": "Specify the resource tags.",
+          "tooltip": "Specify the resource tags.",
           "value": {
             "key1": "value1",
             "key2": "value2"
@@ -512,7 +519,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
         }
       ]
     },
@@ -622,7 +630,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
         }
       ]
     }
