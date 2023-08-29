@@ -1,0 +1,333 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+      "@type": "WorkflowCollection",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "72b70a2c-08ef-41e6-84b5-348164452d90",
+          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "steps": [
+            {
+              "uuid": "de887cee-a32f-4e13-af00-4edaad3362ac",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "03884cf5-7fad-4d9a-94a4-3cb5d510f542",
+              "@type": "WorkflowStep",
+              "name": "Create or Update Policy",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Front Door WAF",
+                "config": "''",
+                "params": {
+                  "policyName": "",
+                  "location": "",
+                  "customRules": {
+                    "rules": [
+                      {
+                        "name": "Rule1",
+                        "priority": 1,
+                        "ruleType": "RateLimitRule",
+                        "rateLimitThreshold": 1000,
+                        "matchConditions": [
+                          {
+                            "matchVariable": "RemoteAddr",
+                            "operator": "IPMatch",
+                            "matchValue": [
+                              "1.1.1.1",
+                              "1.1.1.2"
+                            ]
+                          }
+                        ],
+                        "action": "Block"
+                      }
+                    ]
+                  },
+                  "managedRules": {
+                    "managedRuleSets": []
+                  },
+                  "policySettings": {
+                    "customBlockResponseBody": null,
+                    "customBlockResponseStatusCode": null,
+                    "enabledState": "Enabled",
+                    "mode": "Detection",
+                    "redirectUrl": null
+                  },
+                  "sku": "",
+                  "tags": {
+                    "key1": "value1",
+                    "key2": "value2"
+                  }
+                },
+                "version": "1.0.0",
+                "connector": "azure-front-door-waf",
+                "operation": "create_or_update_policy",
+                "operationTitle": "Create or Update Policy"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create or update policy with specified rule set name within a resource group.",
+          "name": "Create or Update Policy",
+          "tag": "#Azure Front Door WAF",
+          "recordTags": [
+            "Azure",
+            "azure-front-door-waf"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/de887cee-a32f-4e13-af00-4edaad3362ac",
+          "routes": [
+            {
+              "uuid": "3d8ab62b-e88c-4d06-8541-946e00c8a829",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create or Update Policy",
+              "sourceStep": "/api/3/workflow_steps/de887cee-a32f-4e13-af00-4edaad3362ac",
+              "targetStep": "/api/3/workflow_steps/03884cf5-7fad-4d9a-94a4-3cb5d510f542"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e81d62c8-bb5d-4f78-ac4e-302c20310d80",
+          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "steps": [
+            {
+              "uuid": "ce5541bf-9aa3-4c89-8568-40e3c7a5b32a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "cf4d6eef-d105-4181-b3ea-417f3ab5eaa4",
+              "@type": "WorkflowStep",
+              "name": "Get Policy Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Front Door WAF",
+                "config": "''",
+                "params": {
+                  "policyName": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-front-door-waf",
+                "operation": "get_policy_details",
+                "operationTitle": "Get Policy Details"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve protection policy with specified name within a resource group.",
+          "name": "Get Policy Details",
+          "tag": "#Azure Front Door WAF",
+          "recordTags": [
+            "Azure",
+            "azure-front-door-waf"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ce5541bf-9aa3-4c89-8568-40e3c7a5b32a",
+          "routes": [
+            {
+              "uuid": "06df8a1b-4b4c-4467-ba3e-756bac3ee5bb",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Policy Details",
+              "sourceStep": "/api/3/workflow_steps/ce5541bf-9aa3-4c89-8568-40e3c7a5b32a",
+              "targetStep": "/api/3/workflow_steps/cf4d6eef-d105-4181-b3ea-417f3ab5eaa4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b0944bc0-83ba-4c9b-beb7-913d07a985d6",
+          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "steps": [
+            {
+              "uuid": "50f12fe7-444f-4f45-9e6a-2b2bc8624a0f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1281846f-8b9d-4759-ad4c-cf0138ccf4f8",
+              "@type": "WorkflowStep",
+              "name": "Get Policies List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Front Door WAF",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "azure-front-door-waf",
+                "operation": "get_policies_list",
+                "operationTitle": "Get Policies List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Lists all of the protection policies within a resource group.",
+          "name": "Get Policies List",
+          "tag": "#Azure Front Door WAF",
+          "recordTags": [
+            "Azure",
+            "azure-front-door-waf"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/50f12fe7-444f-4f45-9e6a-2b2bc8624a0f",
+          "routes": [
+            {
+              "uuid": "ee55239f-a519-4fff-8871-0ddb0ecae4fc",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Policies List",
+              "sourceStep": "/api/3/workflow_steps/50f12fe7-444f-4f45-9e6a-2b2bc8624a0f",
+              "targetStep": "/api/3/workflow_steps/1281846f-8b9d-4759-ad4c-cf0138ccf4f8"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "659bb96c-72a0-44d7-a680-56f00064601d",
+          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "steps": [
+            {
+              "uuid": "1ad6051b-6ca1-4fbb-a0d2-b0bf13b01e94",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c2ddfddc-f047-48ad-adb1-92cdf6da19be",
+              "@type": "WorkflowStep",
+              "name": "Delete Policy",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Front Door WAF",
+                "config": "''",
+                "params": {
+                  "policyName": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-front-door-waf",
+                "operation": "delete_policy",
+                "operationTitle": "Delete Policy"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Delete policy based on the policy name that you have specified.",
+          "name": "Delete Policy",
+          "tag": "#Azure Front Door WAF",
+          "recordTags": [
+            "Azure",
+            "azure-front-door-waf"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1ad6051b-6ca1-4fbb-a0d2-b0bf13b01e94",
+          "routes": [
+            {
+              "uuid": "c22208f1-ed77-45df-9bda-574827cc7257",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Policy",
+              "sourceStep": "/api/3/workflow_steps/1ad6051b-6ca1-4fbb-a0d2-b0bf13b01e94",
+              "targetStep": "/api/3/workflow_steps/c2ddfddc-f047-48ad-adb1-92cdf6da19be"
+            }
+          ]
+        }
+      ],
+      "name": "Sample - Azure Front Door WAF - 1.0.0",
+      "description": "Azure Front Door Service enables you to define, manage, and monitor the global routing for your web traffic by optimizing for best performance and instant global failover for high availability. With Front Door, you can transform your global (multi-region) consumer and enterprise applications into robust, high-performance personalized modern applications, APIs, and content that reach a global audience with Azure.",
+      "visible": true,
+      "recordTags": [
+        "Azure",
+        "azure-front-door-waf"
+      ]
+    }
+  ]
+}
