@@ -1,3 +1,9 @@
+""" Copyright start
+  Copyright (C) 2008 - 2023 Fortinet Inc.
+  All rights reserved.
+  FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
+  Copyright end """
+
 from connectors.core.connector import Connector, get_logger, ConnectorError
 from .operations import operations
 from .microsoft_api_auth import check
@@ -6,7 +12,7 @@ from .microsoft_api_auth import check
 logger = get_logger("azure-front-door-waf")
 
 
-class MSManagmentActivity(Connector):
+class AzureFrontDoorWAF(Connector):
     def execute(self, config, operation, params, **kwargs):
         try:
             connector_info = {"connector_name": self._info_json.get('name'),

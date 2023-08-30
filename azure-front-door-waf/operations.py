@@ -1,3 +1,9 @@
+""" Copyright start
+  Copyright (C) 2008 - 2023 Fortinet Inc.
+  All rights reserved.
+  FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
+  Copyright end """
+
 import json
 
 from requests import request, exceptions as req_exceptions
@@ -147,7 +153,7 @@ def get_policies_list(config, params, connector_info):
 def delete_policy(config, params, connector_info):
     endpoint = get_endpoint("delete_policy", config, params)
     response = api_request("DELETE", endpoint, connector_info, config)
-    return response
+    return {"success": "Deleted Successfully"}
 
 
 operations = {

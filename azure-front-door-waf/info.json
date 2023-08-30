@@ -621,7 +621,7 @@
       "category": "investigation",
       "annotation": "delete_policy",
       "enabled": true,
-      "output_schema": {},
+      "output_schema": {"success": "Deleted Successfully"},
       "parameters": [
         {
           "title": "Policy Name",
