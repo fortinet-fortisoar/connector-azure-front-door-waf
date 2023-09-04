@@ -1,0 +1,968 @@
+{
+  "name": "azure-front-door-waf",
+  "label": "Azure Front Door WAF",
+  "version": "1.0.0",
+  "description": "Azure Front Door Service enables you to define, manage, and monitor the global routing for your web traffic by optimizing for best performance and instant global failover for high availability. With Front Door, you can transform your global (multi-region) consumer and enterprise applications into robust, high-performance personalized modern applications, APIs, and content that reach a global audience with Azure.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Firewall and Network Protection",
+  "icon_small_name": "small.jpg",
+  "icon_large_name": "large.jpg",
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Get Access Token",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "options": [
+          "On behalf of User - Delegate Permissions",
+          "Without a User - Application Permissions"
+        ],
+        "name": "auth_type",
+        "value": "On behalf of User - Delegate Permissions",
+        "description": "Select the method using which you will get access tokens used to access the management activity APIs.",
+        "onchange": {
+          "Without a User - Application Permissions": [
+            {
+              "title": "Server URL",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "resource",
+              "value": "https://management.azure.com",
+              "description": "The service-based URI to connect and perform the automated operations."
+            },
+            {
+              "title": "Client ID",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "client_id",
+              "description": "Unique API ID of the Azure AD application that is used to create an authentication token required to access the API.",
+              "tooltip": "Unique API ID of the Azure AD application that is used to create an authentication token required to access the API."
+            },
+            {
+              "title": "Client Secret",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "client_secret",
+              "description": "Unique API Secret of the Azure AD application that is used to create an authentication token required to access the API.",
+              "tooltip": "Unique API Secret of the Azure AD application that is used to create an authentication token required to access the API."
+            },
+            {
+              "title": "Tenant ID",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "tenant_id",
+              "description": "ID of the tenant that you have been provided for your Azure Active Directory instance.",
+              "tooltip": "ID of the tenant that you have been provided for your Azure Active Directory instance."
+            },
+            {
+              "title": "Resource Group Name",
+              "name": "resource_group_name",
+              "type": "text",
+              "tooltip": "Name of the resource group that holds resources on the Azure Portal.",
+              "description": "Name of the resource group that holds resources on the Azure Portal.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Subscription ID",
+              "name": "subscription_id",
+              "type": "text",
+              "tooltip": "Subscription credentials that uniquely identify the Microsoft Azure subscription.",
+              "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "API Version",
+              "name": "api_version",
+              "type": "text",
+              "tooltip": "Specify the API version to use for all automated operations using this connector.",
+              "description": "Specify the API version to use for all automated operations using this connector.",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "value": "2020-11-01"
+            },
+            {
+              "title": "Verify SSL",
+              "required": false,
+              "editable": true,
+              "visible": true,
+              "type": "checkbox",
+              "name": "verify_ssl",
+              "value": true,
+              "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+            }
+          ],
+          "On behalf of User - Delegate Permissions": [
+            {
+              "title": "Server URL",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "resource",
+              "value": "https://management.azure.com",
+              "description": "The service-based URI to connect and perform the automated operations. "
+            },
+            {
+              "title": "Client ID",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "client_id",
+              "description": "Unique API ID of the Azure AD application that is used to create an authentication token required to access the API.",
+              "tooltip": "Unique API ID of the Azure AD application that is used to create an authentication token required to access the API."
+            },
+            {
+              "title": "Client Secret",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "client_secret",
+              "description": "Unique API Secret of the Azure AD application that is used to create an authentication token required to access the API.",
+              "tooltip": "Unique API Secret of the Azure AD application that is used to create an authentication token required to access the API."
+            },
+            {
+              "title": "Tenant ID",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "tenant_id",
+              "description": "ID of the tenant that you have been provided for your Azure Active Directory instance.",
+              "tooltip": "ID of the tenant that you have been provided for your Azure Active Directory instance."
+            },
+            {
+              "title": "Auth Code",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "code",
+              "tooltip": "The authorization code that you acquired during the authorization step.",
+              "description": "The authorization code that you acquired during the authorization step."
+            },
+            {
+              "title": "Resource Group Name",
+              "name": "resource_group_name",
+              "type": "text",
+              "tooltip": "Name of the resource group that holds resources on the Azure Portal.",
+              "description": "Name of the resource group that holds resources on the Azure Portal.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Subscription ID",
+              "name": "subscription_id",
+              "type": "text",
+              "tooltip": "Subscription credentials that uniquely identify the Microsoft Azure subscription. ",
+              "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. ",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "API Version",
+              "name": "api_version",
+              "type": "text",
+              "tooltip": "Specify the API version to use for all automated operations using this connector. ",
+              "description": "Specify the API version to use for all automated operations using this connector. ",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "value": "2020-11-01"
+            },
+            {
+              "title": "Redirect URL",
+              "required": false,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "redirect_url",
+              "description": "The redirect_uri of your app, where authentication responses can be sent and received by your app. It must exactly match one of the redirect_uri you registered in the app registration portal.",
+              "tooltip": "The redirect_uri of your app, where authentication responses can be sent and received by your app. It must exactly match one of the redirect_uri you registered in the app registration portal."
+            },
+            {
+              "title": "Verify SSL",
+              "required": false,
+              "editable": true,
+              "visible": true,
+              "type": "checkbox",
+              "name": "verify_ssl",
+              "value": true,
+              "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "create_or_update_policy",
+      "title": "Create or Update Policy",
+      "description": "Create or update policy with specified rule set name within a resource group.",
+      "category": "investigation",
+      "annotation": "create_or_update_policy",
+      "enabled": true,
+      "output_schema": {
+        "name": "",
+        "id": "",
+        "type": "",
+        "tags": "",
+        "location": "",
+        "properties": {
+          "resourceState": "",
+          "provisioningState": "",
+          "policySettings": {
+            "enabledState": "",
+            "mode": "",
+            "redirectUrl": "",
+            "customBlockResponseStatusCode": "",
+            "customBlockResponseBody": "",
+            "requestBodyCheck": ""
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "",
+                "priority": "",
+                "enabledState": "",
+                "ruleType": "",
+                "rateLimitDurationInMinutes": "",
+                "rateLimitThreshold": "",
+                "matchConditions": [
+                  {
+                    "matchVariable": "",
+                    "selector": "",
+                    "operator": "",
+                    "negateCondition": "",
+                    "matchValue": [],
+                    "transforms": []
+                  }
+                ],
+                "action": ""
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "",
+                "ruleSetVersion": "",
+                "ruleSetAction": "",
+                "exclusions": [
+                  {
+                    "matchVariable": "",
+                    "selectorMatchOperator": "",
+                    "selector": ""
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "",
+                    "exclusions": [
+                      {
+                        "matchVariable": "",
+                        "selectorMatchOperator": "",
+                        "selector": ""
+                      }
+                    ],
+                    "rules": [
+                      {
+                        "ruleId": "",
+                        "enabledState": "",
+                        "action": "",
+                        "exclusions": [
+                          {
+                            "matchVariable": "",
+                            "selectorMatchOperator": "",
+                            "selector": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        },
+        {
+          "title": "Location",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "location",
+          "description": "Specify the resource location.",
+          "tooltip": "Specify the resource location.",
+          "placeholder": "eg: Global"
+        },
+        {
+          "title": "Custom Rules",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "customRules",
+          "description": "Specify custom rules inside the policy.",
+          "tooltip": "Specify custom rules inside the policy.",
+          "value": {
+            "rules": [
+              {
+                "name": "Rule1",
+                "enabledState": "Enabled",
+                "priority": 1,
+                "ruleType": "MatchRule",
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "operator": "IPMatch",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "1.1.1.1",
+                      "1.1.1.2"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Managed Rules",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "managedRules",
+          "description": "Specify managed rules inside the policy.",
+          "tooltip": "Specify managed rules inside the policy.",
+          "value": {
+            "managedRuleSets": []
+          }
+        },
+        {
+          "title": "Policy Settings",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "policySettings",
+          "description": "Specify settings for the policy.",
+          "tooltip": "Specify settings for the policy.",
+          "value": {
+            "customBlockResponseBody": null,
+            "customBlockResponseStatusCode": null,
+            "enabledState": "Enabled",
+            "mode": "Detection",
+            "redirectUrl": null
+          }
+        },
+        {
+          "title": "Sku",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sku",
+          "placeholder": "eg: Classic_AzureFrontDoor",
+          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+        },
+        {
+          "title": "Tags",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "tags",
+          "description": "Specify the resource tags.",
+          "tooltip": "Specify the resource tags.",
+          "value": {
+            "key1": "value1",
+            "key2": "value2"
+          }
+        }
+      ]
+    },
+    {
+      "operation": "get_policy_details",
+      "title": "Get Policy Details",
+      "description": "Retrieve protection policy with specified name within a resource group.",
+      "category": "investigation",
+      "annotation": "get_policy_details",
+      "enabled": true,
+      "output_schema": {
+        "name": "",
+        "id": "",
+        "type": "",
+        "tags": "",
+        "location": "",
+        "properties": {
+          "resourceState": "",
+          "provisioningState": "",
+          "policySettings": {
+            "enabledState": "",
+            "mode": "",
+            "redirectUrl": "",
+            "customBlockResponseStatusCode": "",
+            "customBlockResponseBody": "",
+            "requestBodyCheck": ""
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "",
+                "priority": "",
+                "enabledState": "",
+                "ruleType": "",
+                "rateLimitDurationInMinutes": "",
+                "rateLimitThreshold": "",
+                "matchConditions": [
+                  {
+                    "matchVariable": "",
+                    "selector": "",
+                    "operator": "",
+                    "negateCondition": "",
+                    "matchValue": [],
+                    "transforms": []
+                  }
+                ],
+                "action": ""
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "",
+                "ruleSetVersion": "",
+                "ruleSetAction": "",
+                "exclusions": [
+                  {
+                    "matchVariable": "",
+                    "selectorMatchOperator": "",
+                    "selector": ""
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "",
+                    "exclusions": [],
+                    "rules": [
+                      {
+                        "ruleId": "",
+                        "enabledState": "",
+                        "action": "",
+                        "exclusions": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [
+            {
+              "id": ""
+            }
+          ],
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        }
+      ]
+    },
+    {
+      "operation": "get_policies_list",
+      "title": "Get Policies List",
+      "description": "Lists all of the protection policies within a resource group.",
+      "category": "investigation",
+      "annotation": "get_policies_list",
+      "enabled": true,
+      "output_schema": {
+        "value": [
+          {
+            "name": "",
+            "id": "",
+            "type": "",
+            "tags": "",
+            "location": "",
+            "sku": {
+              "name": ""
+            },
+            "properties": {
+              "resourceState": "",
+              "provisioningState": "",
+              "policySettings": {
+                "enabledState": "",
+                "mode": "",
+                "redirectUrl": "",
+                "customBlockResponseStatusCode": "",
+                "customBlockResponseBody": ""
+              },
+              "customRules": {
+                "rules": [
+                  {
+                    "name": "",
+                    "priority": "",
+                    "enabledState": "",
+                    "ruleType": "",
+                    "rateLimitDurationInMinutes": "",
+                    "rateLimitThreshold": "",
+                    "matchConditions": [
+                      {
+                        "matchVariable": "",
+                        "selector": "",
+                        "operator": "",
+                        "negateCondition": "",
+                        "matchValue": [],
+                        "transforms": []
+                      }
+                    ],
+                    "action": ""
+                  }
+                ]
+              },
+              "managedRules": {
+                "managedRuleSets": [
+                  {
+                    "ruleSetType": "",
+                    "ruleSetVersion": "",
+                    "exclusions": [
+                      {
+                        "matchVariable": "",
+                        "selectorMatchOperator": "",
+                        "selector": ""
+                      }
+                    ],
+                    "ruleGroupOverrides": [
+                      {
+                        "ruleGroupName": "",
+                        "rules": [
+                          {
+                            "ruleId": "",
+                            "enabledState": "",
+                            "action": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "frontendEndpointLinks": [
+                {
+                  "id": ""
+                }
+              ],
+              "securityPolicyLinks": []
+            }
+          }
+        ]
+      },
+      "parameters": []
+    },
+    {
+      "operation": "delete_policy",
+      "title": "Delete Policy",
+      "description": "Delete policy based on the policy name that you have specified.",
+      "category": "investigation",
+      "annotation": "delete_policy",
+      "enabled": true,
+      "output_schema": {"success": "Deleted Successfully"},
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        }
+      ]
+    },
+    {
+      "operation": "block_ip",
+      "title": "Block IP",
+      "description": "Create or update policy to block IPs based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "block_ip",
+      "enabled": true,
+      "output_schema": {
+        "name": "",
+        "id": "",
+        "type": "",
+        "tags": "",
+        "location": "",
+        "properties": {
+          "resourceState": "",
+          "provisioningState": "",
+          "policySettings": {
+            "enabledState": "",
+            "mode": "",
+            "redirectUrl": "",
+            "customBlockResponseStatusCode": "",
+            "customBlockResponseBody": "",
+            "requestBodyCheck": ""
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "",
+                "priority": "",
+                "enabledState": "",
+                "ruleType": "",
+                "rateLimitDurationInMinutes": "",
+                "rateLimitThreshold": "",
+                "matchConditions": [
+                  {
+                    "matchVariable": "",
+                    "selector": "",
+                    "operator": "",
+                    "negateCondition": "",
+                    "matchValue": [],
+                    "transforms": []
+                  }
+                ],
+                "action": ""
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "",
+                "ruleSetVersion": "",
+                "ruleSetAction": "",
+                "exclusions": [
+                  {
+                    "matchVariable": "",
+                    "selectorMatchOperator": "",
+                    "selector": ""
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "",
+                    "exclusions": [
+                      {
+                        "matchVariable": "",
+                        "selectorMatchOperator": "",
+                        "selector": ""
+                      }
+                    ],
+                    "rules": [
+                      {
+                        "ruleId": "",
+                        "enabledState": "",
+                        "action": "",
+                        "exclusions": [
+                          {
+                            "matchVariable": "",
+                            "selectorMatchOperator": "",
+                            "selector": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        },
+        {
+          "title": "Location",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "location",
+          "description": "Specify the resource location.",
+          "tooltip": "Specify the resource location.",
+          "placeholder": "eg: Global"
+        },
+        {
+          "title": "Rule Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "rule_name",
+          "description": "Specify the rule name that you want to create or update.",
+          "tooltip": "Specify the rule name that you want to create or update.",
+          "placeholder": "eg: BlockIP"
+        },
+        {
+          "title": "Rule Priority",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rule_priority",
+          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "placeholder": "eg: 101"
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip_address",
+          "description": "Specify the comma separated values of IP addresses that you want to block.",
+          "tooltip": "Specify the comma separated values of IP addresses that you want to block.",
+          "placeholder": "eg: 1.1.1.1,2.2.2.2"
+        },
+        {
+          "title": "Sku",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sku",
+          "placeholder": "eg: Classic_AzureFrontDoor",
+          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+        }
+      ]
+    },
+    {
+      "operation": "unblock_ip",
+      "title": "Unblock IP",
+      "description": "Create or update policy to unblock IPs based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "unblock_ip",
+      "enabled": true,
+      "output_schema": {
+        "name": "",
+        "id": "",
+        "type": "",
+        "tags": "",
+        "location": "",
+        "properties": {
+          "resourceState": "",
+          "provisioningState": "",
+          "policySettings": {
+            "enabledState": "",
+            "mode": "",
+            "redirectUrl": "",
+            "customBlockResponseStatusCode": "",
+            "customBlockResponseBody": "",
+            "requestBodyCheck": ""
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "",
+                "priority": "",
+                "enabledState": "",
+                "ruleType": "",
+                "rateLimitDurationInMinutes": "",
+                "rateLimitThreshold": "",
+                "matchConditions": [
+                  {
+                    "matchVariable": "",
+                    "selector": "",
+                    "operator": "",
+                    "negateCondition": "",
+                    "matchValue": [],
+                    "transforms": []
+                  }
+                ],
+                "action": ""
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "",
+                "ruleSetVersion": "",
+                "ruleSetAction": "",
+                "exclusions": [
+                  {
+                    "matchVariable": "",
+                    "selectorMatchOperator": "",
+                    "selector": ""
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "",
+                    "exclusions": [
+                      {
+                        "matchVariable": "",
+                        "selectorMatchOperator": "",
+                        "selector": ""
+                      }
+                    ],
+                    "rules": [
+                      {
+                        "ruleId": "",
+                        "enabledState": "",
+                        "action": "",
+                        "exclusions": [
+                          {
+                            "matchVariable": "",
+                            "selectorMatchOperator": "",
+                            "selector": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        },
+        {
+          "title": "Location",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "location",
+          "description": "Specify the resource location.",
+          "tooltip": "Specify the resource location.",
+          "placeholder": "eg: Global"
+        },
+        {
+          "title": "Rule Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "rule_name",
+          "description": "Specify the rule name that you want to create or update.",
+          "tooltip": "Specify the rule name that you want to create or update.",
+          "placeholder": "eg: UnblockIP"
+        },
+        {
+          "title": "Rule Priority",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rule_priority",
+          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "placeholder": "eg: 101"
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip_address",
+          "description": "Specify the comma separated values of IP addresses that you want to unblock.",
+          "tooltip": "Specify the comma separated values of IP addresses that you want to unblock.",
+          "placeholder": "eg: 1.1.1.1,2.2.2.2"
+        },
+        {
+          "title": "Sku",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sku",
+          "placeholder": "eg: Classic_AzureFrontDoor",
+          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+        }
+      ]
+    }
+  ]
+}
