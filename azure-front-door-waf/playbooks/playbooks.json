@@ -2,16 +2,16 @@
   "type": "workflow_collections",
   "data": [
     {
-      "uuid": "5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+      "uuid": "52d58f26-6210-4f2d-9484-81ca4e7f1052",
       "@type": "WorkflowCollection",
       "workflows": [
         {
           "@type": "Workflow",
-          "uuid": "72b70a2c-08ef-41e6-84b5-348164452d90",
-          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "uuid": "5430e16e-3058-4f65-98e7-272aa9b66f7b",
+          "collection": "/api/3/workflow_collections/52d58f26-6210-4f2d-9484-81ca4e7f1052",
           "steps": [
             {
-              "uuid": "de887cee-a32f-4e13-af00-4edaad3362ac",
+              "uuid": "fbebf9b3-a57e-4095-9679-809b845ce0d9",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -28,7 +28,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "03884cf5-7fad-4d9a-94a4-3cb5d510f542",
+              "uuid": "eb9aeac6-a8fd-41ae-b639-3e55a1ed707b",
               "@type": "WorkflowStep",
               "name": "Create or Update Policy",
               "description": null,
@@ -43,13 +43,14 @@
                     "rules": [
                       {
                         "name": "Rule1",
+                        "enabledState": "Enabled",
                         "priority": 1,
-                        "ruleType": "RateLimitRule",
-                        "rateLimitThreshold": 1000,
+                        "ruleType": "MatchRule",
                         "matchConditions": [
                           {
                             "matchVariable": "RemoteAddr",
                             "operator": "IPMatch",
+                            "negateCondition": false,
                             "matchValue": [
                               "1.1.1.1",
                               "1.1.1.2"
@@ -99,26 +100,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/de887cee-a32f-4e13-af00-4edaad3362ac",
+          "triggerStep": "/api/3/workflow_steps/fbebf9b3-a57e-4095-9679-809b845ce0d9",
           "routes": [
             {
-              "uuid": "3d8ab62b-e88c-4d06-8541-946e00c8a829",
+              "uuid": "e1591df6-7234-4b5e-b73e-a4ed6263a263",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Create or Update Policy",
-              "sourceStep": "/api/3/workflow_steps/de887cee-a32f-4e13-af00-4edaad3362ac",
-              "targetStep": "/api/3/workflow_steps/03884cf5-7fad-4d9a-94a4-3cb5d510f542"
+              "sourceStep": "/api/3/workflow_steps/fbebf9b3-a57e-4095-9679-809b845ce0d9",
+              "targetStep": "/api/3/workflow_steps/eb9aeac6-a8fd-41ae-b639-3e55a1ed707b"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "e81d62c8-bb5d-4f78-ac4e-302c20310d80",
-          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "uuid": "d9833717-649f-48b8-ae15-97d631d29cc0",
+          "collection": "/api/3/workflow_collections/52d58f26-6210-4f2d-9484-81ca4e7f1052",
           "steps": [
             {
-              "uuid": "ce5541bf-9aa3-4c89-8568-40e3c7a5b32a",
+              "uuid": "68981390-e0bd-4601-b67c-84246c2febb8",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -135,7 +136,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "cf4d6eef-d105-4181-b3ea-417f3ab5eaa4",
+              "uuid": "40a6cf18-1c16-41eb-8548-74f06625cf31",
               "@type": "WorkflowStep",
               "name": "Get Policy Details",
               "description": null,
@@ -169,26 +170,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/ce5541bf-9aa3-4c89-8568-40e3c7a5b32a",
+          "triggerStep": "/api/3/workflow_steps/68981390-e0bd-4601-b67c-84246c2febb8",
           "routes": [
             {
-              "uuid": "06df8a1b-4b4c-4467-ba3e-756bac3ee5bb",
+              "uuid": "f3a6bda8-4972-46ec-90eb-4acf153574cc",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Policy Details",
-              "sourceStep": "/api/3/workflow_steps/ce5541bf-9aa3-4c89-8568-40e3c7a5b32a",
-              "targetStep": "/api/3/workflow_steps/cf4d6eef-d105-4181-b3ea-417f3ab5eaa4"
+              "sourceStep": "/api/3/workflow_steps/68981390-e0bd-4601-b67c-84246c2febb8",
+              "targetStep": "/api/3/workflow_steps/40a6cf18-1c16-41eb-8548-74f06625cf31"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "b0944bc0-83ba-4c9b-beb7-913d07a985d6",
-          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "uuid": "37d18065-e115-44ab-933d-258951a5a5bb",
+          "collection": "/api/3/workflow_collections/52d58f26-6210-4f2d-9484-81ca4e7f1052",
           "steps": [
             {
-              "uuid": "50f12fe7-444f-4f45-9e6a-2b2bc8624a0f",
+              "uuid": "927098a7-4eb3-4e69-820a-ef8a77d071c2",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -205,7 +206,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "1281846f-8b9d-4759-ad4c-cf0138ccf4f8",
+              "uuid": "59a297b5-2faf-4237-b14d-bce4c530ef82",
               "@type": "WorkflowStep",
               "name": "Get Policies List",
               "description": null,
@@ -237,26 +238,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/50f12fe7-444f-4f45-9e6a-2b2bc8624a0f",
+          "triggerStep": "/api/3/workflow_steps/927098a7-4eb3-4e69-820a-ef8a77d071c2",
           "routes": [
             {
-              "uuid": "ee55239f-a519-4fff-8871-0ddb0ecae4fc",
+              "uuid": "0ac68e81-015e-429e-be77-ad0dd125a5a5",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Policies List",
-              "sourceStep": "/api/3/workflow_steps/50f12fe7-444f-4f45-9e6a-2b2bc8624a0f",
-              "targetStep": "/api/3/workflow_steps/1281846f-8b9d-4759-ad4c-cf0138ccf4f8"
+              "sourceStep": "/api/3/workflow_steps/927098a7-4eb3-4e69-820a-ef8a77d071c2",
+              "targetStep": "/api/3/workflow_steps/59a297b5-2faf-4237-b14d-bce4c530ef82"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "659bb96c-72a0-44d7-a680-56f00064601d",
-          "collection": "/api/3/workflow_collections/5f3d2786-dbbd-4ca3-b0e0-f5af8b76ed8b",
+          "uuid": "c2bcd134-17b8-421f-8899-fc7eb26ff5e5",
+          "collection": "/api/3/workflow_collections/52d58f26-6210-4f2d-9484-81ca4e7f1052",
           "steps": [
             {
-              "uuid": "1ad6051b-6ca1-4fbb-a0d2-b0bf13b01e94",
+              "uuid": "d6899228-7041-4927-a3cb-9f6bbc990cee",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -273,7 +274,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "c2ddfddc-f047-48ad-adb1-92cdf6da19be",
+              "uuid": "0b504ca5-c759-427e-b3ef-3a0a7497a817",
               "@type": "WorkflowStep",
               "name": "Delete Policy",
               "description": null,
@@ -307,16 +308,166 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/1ad6051b-6ca1-4fbb-a0d2-b0bf13b01e94",
+          "triggerStep": "/api/3/workflow_steps/d6899228-7041-4927-a3cb-9f6bbc990cee",
           "routes": [
             {
-              "uuid": "c22208f1-ed77-45df-9bda-574827cc7257",
+              "uuid": "fe736f03-4064-4293-9d51-14c7ddb40be2",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Delete Policy",
-              "sourceStep": "/api/3/workflow_steps/1ad6051b-6ca1-4fbb-a0d2-b0bf13b01e94",
-              "targetStep": "/api/3/workflow_steps/c2ddfddc-f047-48ad-adb1-92cdf6da19be"
+              "sourceStep": "/api/3/workflow_steps/d6899228-7041-4927-a3cb-9f6bbc990cee",
+              "targetStep": "/api/3/workflow_steps/0b504ca5-c759-427e-b3ef-3a0a7497a817"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1884c656-454d-46f7-ae65-e5755549a8a1",
+          "collection": "/api/3/workflow_collections/52d58f26-6210-4f2d-9484-81ca4e7f1052",
+          "steps": [
+            {
+              "uuid": "cb840404-3db0-495a-b755-4960d8d9eff9",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "e644c5ee-b040-4306-af58-34482af4a047",
+              "@type": "WorkflowStep",
+              "name": "Block IP",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Front Door WAF",
+                "config": "''",
+                "params": {
+                  "policyName": "",
+                  "location": "",
+                  "rule_name": "",
+                  "rule_priority": "",
+                  "ip_address": "",
+                  "sku": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-front-door-waf",
+                "operation": "block_ip",
+                "operationTitle": "Block IP"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create or update policy to block IPs based on the input parameters that you have specified.",
+          "name": "Block IP",
+          "tag": "#Azure Front Door WAF",
+          "recordTags": [
+            "Azure",
+            "azure-front-door-waf"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cb840404-3db0-495a-b755-4960d8d9eff9",
+          "routes": [
+            {
+              "uuid": "b5cfbb21-2eb8-4ff7-a238-6af191015000",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Block IP",
+              "sourceStep": "/api/3/workflow_steps/cb840404-3db0-495a-b755-4960d8d9eff9",
+              "targetStep": "/api/3/workflow_steps/e644c5ee-b040-4306-af58-34482af4a047"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "090109b2-4b59-4eb7-b721-cfa0cf92571c",
+          "collection": "/api/3/workflow_collections/52d58f26-6210-4f2d-9484-81ca4e7f1052",
+          "steps": [
+            {
+              "uuid": "6778fc24-bea3-4b45-a45f-429380929f0b",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "af4b76e1-a08c-41a1-9be4-5acb0653faef",
+              "@type": "WorkflowStep",
+              "name": "Unblock IP",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Front Door WAF",
+                "config": "''",
+                "params": {
+                  "policyName": "",
+                  "location": "",
+                  "rule_name": "",
+                  "rule_priority": "",
+                  "ip_address": "",
+                  "sku": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-front-door-waf",
+                "operation": "unblock_ip",
+                "operationTitle": "Unblock IP"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create or update policy to unblock IPs based on the input parameters that you have specified.",
+          "name": "Unblock IP",
+          "tag": "#Azure Front Door WAF",
+          "recordTags": [
+            "Azure",
+            "azure-front-door-waf"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6778fc24-bea3-4b45-a45f-429380929f0b",
+          "routes": [
+            {
+              "uuid": "975d3a0f-6255-4e36-87e4-83b21f860a6b",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Unblock IP",
+              "sourceStep": "/api/3/workflow_steps/6778fc24-bea3-4b45-a45f-429380929f0b",
+              "targetStep": "/api/3/workflow_steps/af4b76e1-a08c-41a1-9be4-5acb0653faef"
             }
           ]
         }

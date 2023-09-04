@@ -348,13 +348,14 @@
             "rules": [
               {
                 "name": "Rule1",
+                "enabledState": "Enabled",
                 "priority": 1,
-                "ruleType": "RateLimitRule",
-                "rateLimitThreshold": 1000,
+                "ruleType": "MatchRule",
                 "matchConditions": [
                   {
                     "matchVariable": "RemoteAddr",
                     "operator": "IPMatch",
+                    "negateCondition": false,
                     "matchValue": [
                       "1.1.1.1",
                       "1.1.1.2"
@@ -632,6 +633,334 @@
           "name": "policyName",
           "description": "Specify the name of the Web Application Firewall Policy.",
           "tooltip": "Specify the name of the Web Application Firewall Policy."
+        }
+      ]
+    },
+    {
+      "operation": "block_ip",
+      "title": "Block IP",
+      "description": "Create or update policy to block IPs based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "block_ip",
+      "enabled": true,
+      "output_schema": {
+        "name": "",
+        "id": "",
+        "type": "",
+        "tags": "",
+        "location": "",
+        "properties": {
+          "resourceState": "",
+          "provisioningState": "",
+          "policySettings": {
+            "enabledState": "",
+            "mode": "",
+            "redirectUrl": "",
+            "customBlockResponseStatusCode": "",
+            "customBlockResponseBody": "",
+            "requestBodyCheck": ""
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "",
+                "priority": "",
+                "enabledState": "",
+                "ruleType": "",
+                "rateLimitDurationInMinutes": "",
+                "rateLimitThreshold": "",
+                "matchConditions": [
+                  {
+                    "matchVariable": "",
+                    "selector": "",
+                    "operator": "",
+                    "negateCondition": "",
+                    "matchValue": [],
+                    "transforms": []
+                  }
+                ],
+                "action": ""
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "",
+                "ruleSetVersion": "",
+                "ruleSetAction": "",
+                "exclusions": [
+                  {
+                    "matchVariable": "",
+                    "selectorMatchOperator": "",
+                    "selector": ""
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "",
+                    "exclusions": [
+                      {
+                        "matchVariable": "",
+                        "selectorMatchOperator": "",
+                        "selector": ""
+                      }
+                    ],
+                    "rules": [
+                      {
+                        "ruleId": "",
+                        "enabledState": "",
+                        "action": "",
+                        "exclusions": [
+                          {
+                            "matchVariable": "",
+                            "selectorMatchOperator": "",
+                            "selector": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        },
+        {
+          "title": "Location",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "location",
+          "description": "Specify the resource location.",
+          "tooltip": "Specify the resource location.",
+          "placeholder": "eg: Global"
+        },
+        {
+          "title": "Rule Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "rule_name",
+          "description": "Specify the rule name that you want to create or update.",
+          "tooltip": "Specify the rule name that you want to create or update.",
+          "placeholder": "eg: BlockIP"
+        },
+        {
+          "title": "Rule Priority",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rule_priority",
+          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "placeholder": "eg: 101"
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip_address",
+          "description": "Specify the comma separated values of IP addresses that you want to block.",
+          "tooltip": "Specify the comma separated values of IP addresses that you want to block.",
+          "placeholder": "eg: 1.1.1.1,2.2.2.2"
+        },
+        {
+          "title": "Sku",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sku",
+          "placeholder": "eg: Classic_AzureFrontDoor",
+          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+        }
+      ]
+    },
+    {
+      "operation": "unblock_ip",
+      "title": "Unblock IP",
+      "description": "Create or update policy to unblock IPs based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "unblock_ip",
+      "enabled": true,
+      "output_schema": {
+        "name": "",
+        "id": "",
+        "type": "",
+        "tags": "",
+        "location": "",
+        "properties": {
+          "resourceState": "",
+          "provisioningState": "",
+          "policySettings": {
+            "enabledState": "",
+            "mode": "",
+            "redirectUrl": "",
+            "customBlockResponseStatusCode": "",
+            "customBlockResponseBody": "",
+            "requestBodyCheck": ""
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "",
+                "priority": "",
+                "enabledState": "",
+                "ruleType": "",
+                "rateLimitDurationInMinutes": "",
+                "rateLimitThreshold": "",
+                "matchConditions": [
+                  {
+                    "matchVariable": "",
+                    "selector": "",
+                    "operator": "",
+                    "negateCondition": "",
+                    "matchValue": [],
+                    "transforms": []
+                  }
+                ],
+                "action": ""
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "",
+                "ruleSetVersion": "",
+                "ruleSetAction": "",
+                "exclusions": [
+                  {
+                    "matchVariable": "",
+                    "selectorMatchOperator": "",
+                    "selector": ""
+                  }
+                ],
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "",
+                    "exclusions": [
+                      {
+                        "matchVariable": "",
+                        "selectorMatchOperator": "",
+                        "selector": ""
+                      }
+                    ],
+                    "rules": [
+                      {
+                        "ruleId": "",
+                        "enabledState": "",
+                        "action": "",
+                        "exclusions": [
+                          {
+                            "matchVariable": "",
+                            "selectorMatchOperator": "",
+                            "selector": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
+        },
+        "sku": {
+          "name": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policyName",
+          "description": "Specify the name of the Web Application Firewall Policy.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy."
+        },
+        {
+          "title": "Location",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "location",
+          "description": "Specify the resource location.",
+          "tooltip": "Specify the resource location.",
+          "placeholder": "eg: Global"
+        },
+        {
+          "title": "Rule Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "rule_name",
+          "description": "Specify the rule name that you want to create or update.",
+          "tooltip": "Specify the rule name that you want to create or update.",
+          "placeholder": "eg: UnblockIP"
+        },
+        {
+          "title": "Rule Priority",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rule_priority",
+          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "placeholder": "eg: 101"
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip_address",
+          "description": "Specify the comma separated values of IP addresses that you want to unblock.",
+          "tooltip": "Specify the comma separated values of IP addresses that you want to unblock.",
+          "placeholder": "eg: 1.1.1.1,2.2.2.2"
+        },
+        {
+          "title": "Sku",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sku",
+          "placeholder": "eg: Classic_AzureFrontDoor",
+          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
         }
       ]
     }
