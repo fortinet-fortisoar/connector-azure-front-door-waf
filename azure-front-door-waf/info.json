@@ -640,7 +640,7 @@
       "operation": "block_ip",
       "title": "Block IP",
       "description": "Create or update policy to block IPs based on the input parameters that you have specified.",
-      "category": "investigation",
+      "category": "containment",
       "annotation": "block_ip",
       "enabled": true,
       "output_schema": {
@@ -804,7 +804,7 @@
       "operation": "unblock_ip",
       "title": "Unblock IP",
       "description": "Create or update policy to unblock IPs based on the input parameters that you have specified.",
-      "category": "investigation",
+      "category": "remediation",
       "annotation": "unblock_ip",
       "enabled": true,
       "output_schema": {
