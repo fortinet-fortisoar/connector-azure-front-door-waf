@@ -35,7 +35,7 @@
               "status": null,
               "arguments": {
                 "name": "Azure Front Door WAF",
-                "config": "''",
+                "config": "",
                 "params": {
                   "policyName": "",
                   "location": "",
@@ -143,7 +143,7 @@
               "status": null,
               "arguments": {
                 "name": "Azure Front Door WAF",
-                "config": "''",
+                "config": "",
                 "params": {
                   "policyName": ""
                 },
@@ -213,7 +213,7 @@
               "status": null,
               "arguments": {
                 "name": "Azure Front Door WAF",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "azure-front-door-waf",
@@ -281,7 +281,7 @@
               "status": null,
               "arguments": {
                 "name": "Azure Front Door WAF",
-                "config": "''",
+                "config": "",
                 "params": {
                   "policyName": ""
                 },
@@ -351,7 +351,7 @@
               "status": null,
               "arguments": {
                 "name": "Azure Front Door WAF",
-                "config": "''",
+                "config": "",
                 "params": {
                   "policyName": "",
                   "location": "",
@@ -426,7 +426,7 @@
               "status": null,
               "arguments": {
                 "name": "Azure Front Door WAF",
-                "config": "''",
+                "config": "",
                 "params": {
                   "policyName": "",
                   "location": "",

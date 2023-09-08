@@ -22,16 +22,17 @@ def api_request(method, endpoint, connector_info, config, params={}, data={}, he
         headers["Authorization"] = token
         headers["Content-Type"] = "application/json"
 
-        logger.error(f"\n------------------req start-----------------\n{method} - {endpoint}\nparams - {params}\ndata - {data}")
+        logger.debug(f"\n------------------req start-----------------\n{method} - {endpoint}\nparams - {params}\ndata - {data}")
         response = request(method, endpoint, headers=headers, params=params,
                            data=data, verify=ms.verify_ssl)
+        logger.debug(f"Response status: {response.status_code}\n")
         try:
             from connectors.debug_utils.curl_script import make_curl
-            #make_curl(method, endpoint, headers=headers, params=params, data=data, verify_ssl=ms.verify_ssl)
+            make_curl(method, endpoint, headers=headers, params=params, data=data, verify_ssl=ms.verify_ssl)
         except Exception as err:
             logger.error(f"Error in curl utils: {str(err)}")
 
-        if response.status_code in [200, 201, 204]:
+        if 200 <= response.status_code < 300:
             if response.text != "":
                 return response.json()
             else:
@@ -80,7 +81,7 @@ def get_comma_sep_values(data):
     return data.split(",")
 
 
-def update_match_conditions(new_cond, old_cond):
+def update_match_conditions(new_cond, old_cond, **kwargs):
     if len(old_cond) < 1:
         return new_cond
     elif len(new_cond) < 1:
@@ -95,10 +96,14 @@ def update_match_conditions(new_cond, old_cond):
             negate_cond = new_negate_cond
         elif old_negate_cond or old_negate_cond is False:
             negate_cond = old_negate_cond
+        if kwargs.get("remove_ips"):
+            match_value = list(set(old_match_value) - set(new_match_value))
+        else:
+            match_value = list(set(old_match_value + new_match_value))
         match_conditions = {
             "operator": "IPMatch",
             "selector": new_cond[0].get("selector") or old_cond[0].get("selector"),
-            "matchValue": list(set(old_match_value + new_match_value)),
+            "matchValue": match_value,
             "transforms": new_cond[0].get("transforms") or old_cond[0].get("transforms") or [],
             "matchVariable": new_cond[0].get("matchVariable") or old_cond[0].get("matchVariable"),
             "negateCondition": negate_cond
@@ -108,7 +113,7 @@ def update_match_conditions(new_cond, old_cond):
         return new_cond or old_cond
 
 
-def get_updated_custom_rules(old_custom_rule, new_custom_rule):
+def get_updated_custom_rules(old_custom_rule, new_custom_rule, **kwargs):
     if not old_custom_rule:
         return new_custom_rule
     elif old_custom_rule and not new_custom_rule:
@@ -127,7 +132,7 @@ def get_updated_custom_rules(old_custom_rule, new_custom_rule):
                     "ruleType": new_rule.get("ruleType") or old_rule.get("ruleType"),
                     "rateLimitDurationInMinutes": new_rule.get("rateLimitDurationInMinutes") or old_rule.get("rateLimitDurationInMinutes"),
                     "rateLimitThreshold": new_rule.get("rateLimitThreshold") or old_rule.get("rateLimitThreshold"),
-                    "matchConditions": update_match_conditions(new_rule.get("matchConditions"), old_rule.get("matchConditions")),
+                    "matchConditions": update_match_conditions(new_rule.get("matchConditions"), old_rule.get("matchConditions"), **kwargs),
                     "action": new_rule.get("action") or old_rule.get("action")
                 }
                 rules.append(rule_dict)
@@ -143,10 +148,10 @@ def get_updated_custom_rules(old_custom_rule, new_custom_rule):
     return {"rules": rules}
 
 
-def get_request_data(params, policy):
+def get_request_data(params, policy, **kwargs):
     location = params.get("location") or policy.get("location")
     custom_rules_old = policy.get("properties", {}).get("customRules") or {}
-    updated_custom_rules = get_updated_custom_rules(custom_rules_old, params.get("customRules") or {})
+    updated_custom_rules = get_updated_custom_rules(custom_rules_old, params.get("customRules") or {}, **kwargs)
     managed_rules = params.get("managedRules") or policy.get("properties", {}).get("managedRules")
     policy_settings = params.get("policySettings") or policy.get("properties", {}).get("policySettings")
     sku = params.get("sku") or policy.get("sku")
@@ -167,7 +172,7 @@ def get_request_data(params, policy):
     return req_body
 
 
-def create_or_update_policy(config, params, connector_info):
+def create_or_update_policy(config, params, connector_info, **kwargs):
     policy = {}
     try:
         policy = get_policy_details(config, params, connector_info)
@@ -175,7 +180,7 @@ def create_or_update_policy(config, params, connector_info):
     except Exception:
         logger.info("Policy not found, creating new policy.")
         pass
-    req_body = get_request_data(params, policy)
+    req_body = get_request_data(params, policy, **kwargs)
     endpoint = get_endpoint("create_or_update_policy", config, params)
     response = api_request("PUT", endpoint, connector_info, config, data=json.dumps(req_body))
     return response
@@ -241,12 +246,12 @@ def unblock_ip(config, params, connector_info):
                             "matchValue": get_comma_sep_values(params.get("ip_address") or [])
                         }
                     ],
-                    "action": "Allow"
+                    "action": "Block"
                 }
             ]
         }
     })
-    return create_or_update_policy(config, params, connector_info)
+    return create_or_update_policy(config, params, connector_info, remove_ips=True)
 
 
 operations = {
