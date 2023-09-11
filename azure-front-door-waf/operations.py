@@ -114,6 +114,16 @@ def update_match_conditions(new_cond, old_cond, **kwargs):
 
 
 def get_updated_custom_rules(old_custom_rule, new_custom_rule, **kwargs):
+    if kwargs.get("remove_ips"):
+        rule_found = False
+        new_rule_name = new_custom_rule["rules"][0].get("name")
+        for old_rule in old_custom_rule.get("rules", []):
+            if old_rule.get("name") == new_rule_name:
+                rule_found = True
+                break
+        if not rule_found:
+            raise ConnectorError('Rule not found')
+
     if not old_custom_rule:
         return new_custom_rule
     elif old_custom_rule and not new_custom_rule:
@@ -157,7 +167,7 @@ def get_request_data(params, policy, **kwargs):
     sku = params.get("sku") or policy.get("sku")
     if sku and not isinstance(sku, dict):
         sku = {"name": sku}
-    tags = params.get("tags") or policy.get("tags")
+    tags = params.get("tags", {}) | policy.get("tags", {})
     properties = {}
     req_body = {}
 
@@ -179,7 +189,6 @@ def create_or_update_policy(config, params, connector_info, **kwargs):
         logger.info("Existing policy found, updating the policy.")
     except Exception:
         logger.info("Policy not found, creating new policy.")
-        pass
     req_body = get_request_data(params, policy, **kwargs)
     endpoint = get_endpoint("create_or_update_policy", config, params)
     response = api_request("PUT", endpoint, connector_info, config, data=json.dumps(req_body))
@@ -205,28 +214,54 @@ def delete_policy(config, params, connector_info):
 
 
 def block_ip(config, params, connector_info):
-    params.update({
-        "customRules": {
-            "rules": [
-                {
-                    "name": params.get("rule_name"),
-                    "enabledState": "Enabled",
-                    "priority": params.get("rule_priority"),
-                    "ruleType": "MatchRule",
-                    "matchConditions": [
-                        {
-                            "matchVariable": "RemoteAddr",
-                            "operator": "IPMatch",
-                            "negateCondition": False,
-                            "matchValue": get_comma_sep_values(params.get("ip_address") or [])
-                        }
-                    ],
-                    "action": "Block"
-                }
-            ]
-        }
-    })
-    return create_or_update_policy(config, params, connector_info)
+    policy = {}
+    try:
+        policy = get_policy_details(config, params, connector_info)
+        logger.info("Existing policy found, updating the policy.")
+        params.update({
+            "customRules": {
+                "rules": [
+                    {
+                        "name": params.get("rule_name"),
+                        "priority": params.get("rule_priority"),
+                        "matchConditions": [
+                            {
+                                "operator": "IPMatch",
+                                "matchValue": get_comma_sep_values(params.get("ip_address") or [])
+                            }
+                        ],
+                        "action": "Block"
+                    }
+                ]
+            }
+        })
+    except Exception:
+        logger.info("Policy not found, creating new policy.")
+        params.update({
+            "customRules": {
+                "rules": [
+                    {
+                        "name": params.get("rule_name"),
+                        "enabledState": "Enabled",
+                        "priority": params.get("rule_priority"),
+                        "ruleType": "MatchRule",
+                        "matchConditions": [
+                            {
+                                "matchVariable": "RemoteAddr",
+                                "operator": "IPMatch",
+                                "negateCondition": False,
+                                "matchValue": get_comma_sep_values(params.get("ip_address") or [])
+                            }
+                        ],
+                        "action": "Block"
+                    }
+                ]
+            }
+        })
+    req_body = get_request_data(params, policy)
+    endpoint = get_endpoint("create_or_update_policy", config, params)
+    response = api_request("PUT", endpoint, connector_info, config, data=json.dumps(req_body))
+    return response
 
 
 def unblock_ip(config, params, connector_info):
@@ -235,14 +270,10 @@ def unblock_ip(config, params, connector_info):
             "rules": [
                 {
                     "name": params.get("rule_name"),
-                    "enabledState": "Enabled",
                     "priority": params.get("rule_priority"),
-                    "ruleType": "MatchRule",
                     "matchConditions": [
                         {
-                            "matchVariable": "RemoteAddr",
                             "operator": "IPMatch",
-                            "negateCondition": False,
                             "matchValue": get_comma_sep_values(params.get("ip_address") or [])
                         }
                     ],
@@ -251,7 +282,15 @@ def unblock_ip(config, params, connector_info):
             ]
         }
     })
-    return create_or_update_policy(config, params, connector_info, remove_ips=True)
+    policy = {}
+    try:
+        policy = get_policy_details(config, params, connector_info)
+    except Exception:
+        raise ConnectorError('Policy not found')
+    req_body = get_request_data(params, policy, remove_ips=True)
+    endpoint = get_endpoint("create_or_update_policy", config, params)
+    response = api_request("PUT", endpoint, connector_info, config, data=json.dumps(req_body))
+    return response
 
 
 operations = {
