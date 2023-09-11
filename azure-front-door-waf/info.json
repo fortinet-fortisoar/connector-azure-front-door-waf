@@ -9,7 +9,7 @@
   "category": "Firewall and Network Protection",
   "icon_small_name": "small.jpg",
   "icon_large_name": "large.jpg",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/azure-front-door-waf/679/azure-front-door-waf-v1-0-0",
   "configuration": {
     "fields": [
       {
@@ -393,7 +393,7 @@
             "customBlockResponseBody": null,
             "customBlockResponseStatusCode": null,
             "enabledState": "Enabled",
-            "mode": "Detection",
+            "mode": "Prevention",
             "redirectUrl": null
           }
         },
