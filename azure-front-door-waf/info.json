@@ -24,7 +24,7 @@
         ],
         "name": "auth_type",
         "value": "On behalf of User - Delegate Permissions",
-        "description": "Select the method using which you will get access tokens used to access the management activity APIs.",
+        "description": "Select the method using which you received authentication tokens to access the management activity APIs. You can choose between On behalf of User Delegate Permission or Without a User Application Permission. For more information, see the Getting Access Tokens section.",
         "onchange": {
           "Without a User - Application Permissions": [
             {
@@ -220,7 +220,7 @@
     {
       "operation": "create_or_update_policy",
       "title": "Create or Update Policy",
-      "description": "Create or update policy with specified rule set name within a resource group.",
+      "description": "Creates or updates policy with specified rule set name within a resource group.",
       "category": "investigation",
       "annotation": "create_or_update_policy",
       "enabled": true,
@@ -321,8 +321,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy.",
-          "tooltip": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the Web Application Firewall Policy. If a policy with the specified name exists, the policy is updated, else a new policy is created.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy. If a policy with the specified name exists, the policy is updated, else a new policy is created."
         },
         {
           "title": "Location",
@@ -342,8 +342,8 @@
           "visible": true,
           "type": "json",
           "name": "customRules",
-          "description": "Specify custom rules inside the policy.",
-          "tooltip": "Specify custom rules inside the policy.",
+          "description": "Specify custom rules inside the policy in a JSON format. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
+          "tooltip": "Specify custom rules inside the policy in a JSON format. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
           "value": {
             "rules": [
               {
@@ -374,8 +374,8 @@
           "visible": true,
           "type": "json",
           "name": "managedRules",
-          "description": "Specify managed rules inside the policy.",
-          "tooltip": "Specify managed rules inside the policy.",
+          "description": "Specify managed rules inside the policy in a JSON format.",
+          "tooltip": "Specify managed rules inside the policy in a JSON format.",
           "value": {
             "managedRuleSets": []
           }
@@ -387,8 +387,8 @@
           "visible": true,
           "type": "json",
           "name": "policySettings",
-          "description": "Specify settings for the policy.",
-          "tooltip": "Specify settings for the policy.",
+          "description": "Specify settings for the policy in a JSON format.",
+          "tooltip": "Specify settings for the policy in a JSON format.",
           "value": {
             "customBlockResponseBody": null,
             "customBlockResponseStatusCode": null,
@@ -405,8 +405,8 @@
           "type": "text",
           "name": "sku",
           "placeholder": "eg: Classic_AzureFrontDoor",
-          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
-          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+          "description": "Specify the pricing tier of the web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of the web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
         },
         {
           "title": "Tags",
@@ -415,8 +415,8 @@
           "visible": true,
           "type": "json",
           "name": "tags",
-          "description": "Specify the resource tags.",
-          "tooltip": "Specify the resource tags.",
+          "description": "Specify the resource tags in a JSON format.",
+          "tooltip": "Specify the resource tags in a JSON format.",
           "value": {
             "key1": "value1",
             "key2": "value2"
@@ -427,7 +427,7 @@
     {
       "operation": "get_policy_details",
       "title": "Get Policy Details",
-      "description": "Retrieve protection policy with specified name within a resource group.",
+      "description": "Retrieves protection policy with a specified name within a resource group.",
       "category": "investigation",
       "annotation": "get_policy_details",
       "enabled": true,
@@ -520,8 +520,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy.",
-          "tooltip": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the policy to get its details from Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify the name of the policy to get its details from Azure Front Door Web Application Firewall."
         }
       ]
     },
@@ -618,11 +618,13 @@
     {
       "operation": "delete_policy",
       "title": "Delete Policy",
-      "description": "Delete policy based on the policy name that you have specified.",
+      "description": "Deletes policy based on the policy name that you have specified.",
       "category": "investigation",
       "annotation": "delete_policy",
       "enabled": true,
-      "output_schema": {"success": "Deleted Successfully"},
+      "output_schema": {
+        "success": "Deleted Successfully"
+      },
       "parameters": [
         {
           "title": "Policy Name",
@@ -631,15 +633,15 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy.",
-          "tooltip": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the policy to delete from Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify the name of the policy to delete from Azure Front Door Web Application Firewall."
         }
       ]
     },
     {
       "operation": "block_ip",
       "title": "Block IP",
-      "description": "Create or update policy to block IPs based on the input parameters that you have specified.",
+      "description": "Creates or updates policy to block IPs based on the input parameters that you have specified.",
       "category": "containment",
       "annotation": "block_ip",
       "enabled": true,
@@ -740,8 +742,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy.",
-          "tooltip": "Specify the name of the Web Application Firewall Policy."
+          "description": "Specify the name of the policy to apply for blocking the IP address on Azure Front Door Web Application Firewall. If a policy with the specified name exists, the policy is updated, else a new policy is created.",
+          "tooltip": "Specify the name of the policy to apply for blocking the IP address on Azure Front Door Web Application Firewall. If a policy with the specified name exists, the policy is updated, else a new policy is created."
         },
         {
           "title": "Location",
@@ -750,8 +752,8 @@
           "visible": true,
           "type": "text",
           "name": "location",
-          "description": "Specify the resource location.",
-          "tooltip": "Specify the resource location.",
+          "description": "Specify the resource location to apply the policy for blocking the IP address on Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify the resource location to apply the policy for blocking the IP address on Azure Front Door Web Application Firewall.",
           "placeholder": "eg: Global"
         },
         {
@@ -761,8 +763,8 @@
           "visible": true,
           "type": "text",
           "name": "rule_name",
-          "description": "Specify the rule name that you want to create or update.",
-          "tooltip": "Specify the rule name that you want to create or update.",
+          "description": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
+          "tooltip": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
           "placeholder": "eg: BlockIP"
         },
         {
@@ -772,8 +774,8 @@
           "visible": true,
           "type": "integer",
           "name": "rule_priority",
-          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
-          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "description": "Specify a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
+          "tooltip": "Specify a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
           "placeholder": "eg: 101"
         },
         {
@@ -783,8 +785,8 @@
           "visible": true,
           "type": "text",
           "name": "ip_address",
-          "description": "Specify the comma separated values of IP addresses that you want to block.",
-          "tooltip": "Specify the comma separated values of IP addresses that you want to block.",
+          "description": "Specify a comma-separated list of IP addresses that you want to block on Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify a comma-separated list of IP addresses that you want to block on Azure Front Door Web Application Firewall.",
           "placeholder": "eg: 1.1.1.1,2.2.2.2"
         },
         {
@@ -795,15 +797,15 @@
           "type": "text",
           "name": "sku",
           "placeholder": "eg: Classic_AzureFrontDoor",
-          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
-          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
+          "description": "Specify the pricing tier of the policy on Azure Front Door Web Application Firewall. Defaults to Classic_AzureFrontDoor if not specified.",
+          "tooltip": "Specify the pricing tier of the policy on Azure Front Door Web Application Firewall. Defaults to Classic_AzureFrontDoor if not specified."
         }
       ]
     },
     {
       "operation": "unblock_ip",
       "title": "Unblock IP",
-      "description": "Create or update policy to unblock IPs based on the input parameters that you have specified.",
+      "description": "Creates or updates policy to unblock IPs based on the input parameters that you have specified.",
       "category": "remediation",
       "annotation": "unblock_ip",
       "enabled": true,
@@ -904,19 +906,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy.",
-          "tooltip": "Specify the name of the Web Application Firewall Policy."
-        },
-        {
-          "title": "Location",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "location",
-          "description": "Specify the resource location.",
-          "tooltip": "Specify the resource location.",
-          "placeholder": "eg: Global"
+          "description": "Specify the name of the policy for unblocking the IP address on Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify the name of the policy for unblocking the IP address on Azure Front Door Web Application Firewall."
         },
         {
           "title": "Rule Name",
@@ -925,20 +916,9 @@
           "visible": true,
           "type": "text",
           "name": "rule_name",
-          "description": "Specify the rule name that you want to create or update.",
-          "tooltip": "Specify the rule name that you want to create or update.",
+          "description": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall.",
           "placeholder": "eg: UnblockIP"
-        },
-        {
-          "title": "Rule Priority",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "integer",
-          "name": "rule_priority",
-          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
-          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
-          "placeholder": "eg: 101"
         },
         {
           "title": "IP Address",
@@ -947,20 +927,9 @@
           "visible": true,
           "type": "text",
           "name": "ip_address",
-          "description": "Specify the comma separated values of IP addresses that you want to unblock.",
-          "tooltip": "Specify the comma separated values of IP addresses that you want to unblock.",
+          "description": "Specify a comma-separated list of IP addresses that you want to unblock on Azure Front Door Web Application Firewall.",
+          "tooltip": "Specify a comma-separated list of IP addresses that you want to unblock on Azure Front Door Web Application Firewall.",
           "placeholder": "eg: 1.1.1.1,2.2.2.2"
-        },
-        {
-          "title": "Sku",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "sku",
-          "placeholder": "eg: Classic_AzureFrontDoor",
-          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
-          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
         }
       ]
     }

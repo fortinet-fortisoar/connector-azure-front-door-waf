@@ -114,16 +114,6 @@ def update_match_conditions(new_cond, old_cond, **kwargs):
 
 
 def get_updated_custom_rules(old_custom_rule, new_custom_rule, **kwargs):
-    if kwargs.get("remove_ips"):
-        rule_found = False
-        new_rule_name = new_custom_rule["rules"][0].get("name")
-        for old_rule in old_custom_rule.get("rules", []):
-            if old_rule.get("name") == new_rule_name:
-                rule_found = True
-                break
-        if not rule_found:
-            raise ConnectorError('Rule not found')
-
     if not old_custom_rule:
         return new_custom_rule
     elif old_custom_rule and not new_custom_rule:
@@ -213,11 +203,31 @@ def delete_policy(config, params, connector_info):
     return {"success": "Deleted Successfully"}
 
 
+def check_rule(policy, params):
+    rule_found = False
+    ip_rule = False
+    old_rules = policy.get("properties", {}).get("customRules", {}).get("rules", [])
+    for rule in old_rules:
+        if rule.get("name") == params.get("rule_name"):
+            rule_found = True
+            match_conditions = rule.get("matchConditions", [])
+            if len(match_conditions) > 0 and match_conditions[0].get("operator") == "IPMatch":
+                ip_rule = True
+                break
+    if rule_found and not ip_rule:
+        raise ConnectorError("Rule name already present with different Match Type.")
+    return ip_rule
+
+
 def block_ip(config, params, connector_info):
     policy = {}
     try:
         policy = get_policy_details(config, params, connector_info)
         logger.info("Existing policy found, updating the policy.")
+    except Exception:
+        logger.info("Policy not found, creating new policy.")
+
+    if check_rule(policy, params):
         params.update({
             "customRules": {
                 "rules": [
@@ -235,8 +245,7 @@ def block_ip(config, params, connector_info):
                 ]
             }
         })
-    except Exception:
-        logger.info("Policy not found, creating new policy.")
+    else:
         params.update({
             "customRules": {
                 "rules": [
@@ -270,7 +279,6 @@ def unblock_ip(config, params, connector_info):
             "rules": [
                 {
                     "name": params.get("rule_name"),
-                    "priority": params.get("rule_priority"),
                     "matchConditions": [
                         {
                             "operator": "IPMatch",
@@ -287,6 +295,9 @@ def unblock_ip(config, params, connector_info):
         policy = get_policy_details(config, params, connector_info)
     except Exception:
         raise ConnectorError('Policy not found')
+
+    if not check_rule(policy, params):
+        raise ConnectorError('Rule not found')
     req_body = get_request_data(params, policy, remove_ips=True)
     endpoint = get_endpoint("create_or_update_policy", config, params)
     response = api_request("PUT", endpoint, connector_info, config, data=json.dumps(req_body))
