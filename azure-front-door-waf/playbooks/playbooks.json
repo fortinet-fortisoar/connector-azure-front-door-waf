@@ -429,11 +429,8 @@
                 "config": "",
                 "params": {
                   "policyName": "",
-                  "location": "",
                   "rule_name": "",
-                  "rule_priority": "",
-                  "ip_address": "",
-                  "sku": ""
+                  "ip_address": ""
                 },
                 "version": "1.0.0",
                 "connector": "azure-front-door-waf",

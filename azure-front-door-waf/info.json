@@ -908,17 +908,6 @@
           "tooltip": "Specify the name of the Web Application Firewall Policy."
         },
         {
-          "title": "Location",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "location",
-          "description": "Specify the resource location.",
-          "tooltip": "Specify the resource location.",
-          "placeholder": "eg: Global"
-        },
-        {
           "title": "Rule Name",
           "required": true,
           "editable": true,
@@ -930,17 +919,6 @@
           "placeholder": "eg: UnblockIP"
         },
         {
-          "title": "Rule Priority",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "integer",
-          "name": "rule_priority",
-          "description": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
-          "tooltip": "Assign a unique number to the rule to specify the order in which the rule is processed relative to other custom rules. Rules with lower values are evaluated before rules with higher values. Best practice is to assign numbers in increments of 100 to make prioritizing rules easy if necessary.",
-          "placeholder": "eg: 101"
-        },
-        {
           "title": "IP Address",
           "required": true,
           "editable": true,
@@ -950,17 +928,6 @@
           "description": "Specify the comma separated values of IP addresses that you want to unblock.",
           "tooltip": "Specify the comma separated values of IP addresses that you want to unblock.",
           "placeholder": "eg: 1.1.1.1,2.2.2.2"
-        },
-        {
-          "title": "Sku",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "sku",
-          "placeholder": "eg: Classic_AzureFrontDoor",
-          "description": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
-          "tooltip": "Specify the pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified."
         }
       ]
     }
