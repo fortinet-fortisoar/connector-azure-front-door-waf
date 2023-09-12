@@ -24,7 +24,7 @@
         ],
         "name": "auth_type",
         "value": "On behalf of User - Delegate Permissions",
-        "description": "Select the method using which you received authentication tokens to access the management activity APIs. You can choose between On behalf of User \u2013 Delegate Permission or Without a User \u2013 Application Permission. For more information, see the Getting Access Tokens section.",
+        "description": "Select the method using which you received authentication tokens to access the management activity APIs. You can choose between On behalf of User Delegate Permission or Without a User Application Permission. For more information, see the Getting Access Tokens section.",
         "onchange": {
           "Without a User - Application Permissions": [
             {
@@ -321,8 +321,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the Web Application Firewall Policy. If a policy with the specified name exists, the policy is updated, else a new policy is created.<![if !supportAnnotations]>[OK1]<![endif]> <![if !supportAnnotations]>[AS2]<![endif]>",
-          "tooltip": "Specify the name of the Web Application Firewall Policy. If a policy with the specified name exists, the policy is updated, else a new policy is created.<![if !supportAnnotations]>[OK1]<![endif]> <![if !supportAnnotations]>[AS2]<![endif]>"
+          "description": "Specify the name of the Web Application Firewall Policy. If a policy with the specified name exists, the policy is updated, else a new policy is created.",
+          "tooltip": "Specify the name of the Web Application Firewall Policy. If a policy with the specified name exists, the policy is updated, else a new policy is created."
         },
         {
           "title": "Location",
@@ -342,8 +342,8 @@
           "visible": true,
           "type": "json",
           "name": "customRules",
-          "description": "Specify custom rules inside the policy in a JSON format. If a rule with the specified name exists, the rule is updated, else a new rule is created.<![if !supportAnnotations]>[OK3]<![endif]> <![if !supportAnnotations]>[AS4]<![endif]>",
-          "tooltip": "Specify custom rules inside the policy in a JSON format. If a rule with the specified name exists, the rule is updated, else a new rule is created.<![if !supportAnnotations]>[OK3]<![endif]> <![if !supportAnnotations]>[AS4]<![endif]>",
+          "description": "Specify custom rules inside the policy in a JSON format. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
+          "tooltip": "Specify custom rules inside the policy in a JSON format. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
           "value": {
             "rules": [
               {
@@ -742,8 +742,8 @@
           "visible": true,
           "type": "text",
           "name": "policyName",
-          "description": "Specify the name of the policy to apply for blocking the IP address on Azure Front Door Web Application Firewall. If a policy with the specified name exists, the policy is updated, else a new policy is created.<![if !supportAnnotations]>[OK5]<![endif]> <![if !supportAnnotations]>[AS6]<![endif]>",
-          "tooltip": "Specify the name of the policy to apply for blocking the IP address on Azure Front Door Web Application Firewall. If a policy with the specified name exists, the policy is updated, else a new policy is created.<![if !supportAnnotations]>[OK5]<![endif]> <![if !supportAnnotations]>[AS6]<![endif]>"
+          "description": "Specify the name of the policy to apply for blocking the IP address on Azure Front Door Web Application Firewall. If a policy with the specified name exists, the policy is updated, else a new policy is created.",
+          "tooltip": "Specify the name of the policy to apply for blocking the IP address on Azure Front Door Web Application Firewall. If a policy with the specified name exists, the policy is updated, else a new policy is created."
         },
         {
           "title": "Location",
@@ -763,8 +763,8 @@
           "visible": true,
           "type": "text",
           "name": "rule_name",
-          "description": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall. If a rule with the specified name exists, the rule is updated, else a new rule is created.<![if !supportAnnotations]>[OK7]<![endif]> <![if !supportAnnotations]>[AS8]<![endif]>",
-          "tooltip": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall. If a rule with the specified name exists, the rule is updated, else a new rule is created.<![if !supportAnnotations]>[OK7]<![endif]> <![if !supportAnnotations]>[AS8]<![endif]>",
+          "description": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
+          "tooltip": "Specify the rule name that you want to create or update for blocking the IP address on Azure Front Door Web Application Firewall. If a rule with the specified name exists, the rule is updated, else a new rule is created.",
           "placeholder": "eg: BlockIP"
         },
         {
